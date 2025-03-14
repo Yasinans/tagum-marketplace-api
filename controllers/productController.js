@@ -40,7 +40,8 @@ const addProduct = async (req, res) => {
 const editProductById = async (req, res) => {
     const { id } = req.params;
     const { name, brandId } = req.body;
-    if (!brandId) return res.status(400).json({ message: "Brand ID is required." });
+    if (!brandId || !name) return res.status(400).json({ message: "All fields are required." });
+
     try {
         const brandModel = require('../models/brandModel');
         const brandFound = await brandModel.getBrandById(brandId);

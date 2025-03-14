@@ -4,7 +4,7 @@ const getProducts = async () => {
     const [rows] = await db.query(`
         SELECT p.Product_ID, p.Product_Name, p.Brand_ID, b.Brand_Name
         FROM product p
-        INNER JOIN brand b ON p.brand_id = b.brand_id
+        LEFT JOIN brand b ON p.brand_id = b.brand_id
     `);
     return rows;
 }
@@ -13,7 +13,7 @@ const getProductById = async (id) => {
     const [rows] = await db.query(`
         SELECT p.Product_ID, p.Product_Name, p.Brand_ID, b.Brand_Name
         FROM product p
-        INNER JOIN brand b ON p.brand_id = b.brand_id
+        LEFT JOIN brand b ON p.brand_id = b.brand_id
         WHERE p.product_id = ?
     `,[id]);
     return rows[0];
