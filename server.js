@@ -1,7 +1,10 @@
 require('dotenv').config();
 const fs = require('fs');
 
-const config = JSON.parse(fs.readFileSync('config.json', 'utf-8'));
+const configPath = path.join(__dirname, 'config.json');
+const config = fs.existsSync(configPath)
+  ? JSON.parse(fs.readFileSync(configPath, 'utf-8'))
+  : { port: 3000 };
 const express = require('express');
 const cors = require("cors");
 const bodyParser = require('body-parser');
